@@ -1,0 +1,51 @@
+<style type="text/css">
+	
+	h1{
+		
+		
+		border: 2px solid green;
+		margin-right: 500px;
+		margin-left: 500px;
+		left: 50%;
+		text-align: center;
+	}
+	
+	 .ord {
+  list-style-position: inside;
+}
+
+.ord li{
+  position: relative;
+  left: 0px;
+  font-size: 20px;
+  font-family: monospace;
+  
+}
+
+	form{
+		text-align: center;
+	}
+	
+</style>
+<h1>Todo List</h1>
+<!--<ul>
+	<li>todo list item A</li>
+	<li>todo list item B</li>
+</ul>
+-->
+<ol class="ord">
+	{% for todo_items in all_items %}
+	 <li style="margin: 15px;">{{ todo_items.content }}
+		 <form action="/deleteTodo/{{todo_items.id}}/" method="post">
+			{% csrf_token %}
+			<input type="submit" value="Delete" style="color: red;">
+		</form>
+	 </li>
+	 {% endfor %}
+</ol>
+<form action="/addTodo/" method="post">
+	{% csrf_token %}
+	<h3>Add tasks</h3>
+	<input type="text" name="content" required>
+	<input type="submit" value="Add" style="color: blue;">
+</form>
